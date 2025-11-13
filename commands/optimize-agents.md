@@ -4,7 +4,7 @@ Analyze and optimize AGENTS.md files across hierarchy for token efficiency, redu
 
 ## Invocation
 
-This command invokes the `optimize-agents-context` skill from the agents-context-system plugin.
+Use and follow the `optimize-agents-context` skill exactly as written.
 
 ## Usage
 

@@ -4,7 +4,7 @@ Add tasks to the appropriate hierarchy level with proper context awareness and i
 
 ## Invocation
 
-This command invokes the `add-task` skill from the agents-context-system plugin.
+Use and follow the `add-task` skill exactly as written.
 
 ## Usage
 

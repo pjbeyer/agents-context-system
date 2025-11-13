@@ -4,7 +4,7 @@ Analyze and optimize MCP server configuration, documentation hierarchy, and inte
 
 ## Invocation
 
-This command invokes the `optimize-mcp-config` skill from the agents-context-system plugin.
+Use and follow the `optimize-mcp-config` skill exactly as written.
 
 ## Usage
 
