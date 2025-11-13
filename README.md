@@ -2,6 +2,22 @@
 
 Optimize AGENTS.md files, manage MCP configuration, and load context efficiently.
 
+## Quick Start for New Users
+
+**Pre-approve skills for faster workflow**: Add this to your Claude Code settings:
+
+```json
+{
+  "approvedSkills": [
+    "agents-context-system:optimize-agents-context",
+    "agents-context-system:optimize-mcp-config",
+    "agents-context-system:add-task"
+  ]
+}
+```
+
+**Benefits**: Commands like `/optimize-agents` will run without prompting.
+
 ## Features
 
 - **AGENTS.md Optimization**: Token-efficient context files with hierarchy awareness
