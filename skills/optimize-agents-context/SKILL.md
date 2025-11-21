@@ -199,6 +199,51 @@ Before completing optimization:
 - ✓ Profile standards respected
 - ✓ Optimization history updated
 
+## Workflow Integration
+
+After detecting budget violations, offer to create workflow issues:
+
+```bash
+# After analysis completes
+echo ""
+echo "Budget violations detected. Create workflow issues? (y/n)"
+```
+
+**Use AskUserQuestion tool:**
+- Question: "Create workflow issues for budget violations?"
+- Options:
+  - yes: "Create tracking issues"
+  - no: "Skip (handle manually)"
+
+**If yes, for each violation:**
+```bash
+# Extract violation details
+file_path="[path from detect-budget-violations.sh]"
+current_size="[size from violation output]"
+max_size="[budget from violation output]"
+over_by="[overage from violation output]"
+
+# Generate recommendations based on file analysis
+recommendations="Based on content analysis:
+- Extract detailed procedures to docs/workflows/
+- Move verbose descriptions to docs/reference/
+- Remove duplication from parent AGENTS.md"
+
+# Call issue creation script
+~/.claude/plugins/cache/agents-documentation-suite/scripts/create-optimization-issue.sh \
+    "$file_path" "$current_size" "$max_size" "$recommendations"
+```
+
+**When to create issues:**
+- User confirms with 'y'
+- More than 2 violations detected
+- Violation is >20% over budget
+
+**Issue tracking:**
+- Created in project repository
+- Labels: `documentation`, `optimization`
+- Linked to analysis report in `docs/optimization/`
+
 ## Integration
 
 This skill can be invoked by:
