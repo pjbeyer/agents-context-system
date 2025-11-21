@@ -76,6 +76,35 @@ Optimize MCP server configuration and documentation.
 - Validates integrations
 - Documents cross-profile patterns
 
+### `/optimize-settings`
+
+Optimize Claude Code settings configuration and management.
+
+```bash
+# Optimize settings (context-adaptive)
+/optimize-settings
+
+# Force specific mode
+/optimize-settings --global
+/optimize-settings --user-only
+
+# Dry run (show recommendations only)
+/optimize-settings --dry-run
+```
+
+**What it does**:
+- Detects context and adapts scope
+- Discovers all relevant settings files
+- Analyzes: consolidation, security, migration, performance, best practices
+- Classifies by priority (HIGH/MEDIUM/LOW)
+- Interactive approval flow
+- Comprehensive documentation
+
+**Context modes**:
+- Global: Scans all profiles/projects
+- Project: Analyzes user + current project
+- User: User-level settings only
+
 ### `/add-task`
 
 Add tasks to hierarchy-aware task management.
@@ -93,9 +122,10 @@ Add tasks to hierarchy-aware task management.
 
 ## Skills
 
-### Optimization Skills (2)
+### Optimization Skills (3)
 - **optimize-agents-context**: AGENTS.md optimization and token efficiency
 - **optimize-mcp-config**: MCP configuration and documentation optimization
+- **optimize-settings**: Settings optimization with priority-based recommendations
 
 ### Hierarchy Skills (3)
 - **detect-profile**: Detect current profile (pjbeyer/work/play/home/global)
