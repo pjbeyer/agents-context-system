@@ -1,0 +1,7 @@
+{
+  "name": "context-system-dev",
+  "plugins": [{
+    "name": "agents-context-system",
+    "source": "./"
+  }]
+}
