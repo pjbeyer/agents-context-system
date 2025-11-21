@@ -319,8 +319,58 @@ fi
 **Step 7: Check performance optimizations**
 
 ```bash
-# TODO: Implement in next task
-echo "⏳ Performance analysis - TODO"
+echo "⚡ Running performance analysis..."
+
+declare -a performance_recommendations=()
+performance_priority=()
+
+# Check permission ordering (specific should come before general)
+echo "  → Analyzing permission ordering..."
+
+user_allows_array=$(jq -r '.permissions.allow[]?' "$user_settings" 2>/dev/null)
+prev_was_wildcard=false
+
+while IFS= read -r perm; do
+    # Check if this is a specific permission after a wildcard
+    if [[ "$prev_was_wildcard" == "true" ]] && [[ "$perm" != *"*"* ]]; then
+        performance_recommendations+=("Reorder: Specific permission after wildcard may not be evaluated: $perm")
+        performance_priority+=("MEDIUM")
+    fi
+
+    # Track if current is wildcard
+    if [[ "$perm" == *"*"* ]]; then
+        prev_was_wildcard=true
+    fi
+done <<< "$user_allows_array"
+
+# Check for repeated paths that could use env variables
+echo "  → Checking for env variable opportunities..."
+
+# Count path occurrences
+declare -A path_counts
+while IFS= read -r perm; do
+    # Extract paths from permissions
+    if [[ "$perm" =~ \(([^)]+)\) ]]; then
+        path="${BASH_REMATCH[1]}"
+
+        # Skip if already using env var
+        if [[ "$path" != *"$"* ]]; then
+            base_path=$(dirname "$path" 2>/dev/null || echo "$path")
+            path_counts["$base_path"]=$((${path_counts["$base_path"]:-0} + 1))
+        fi
+    fi
+done <<< "$user_allows_array"
+
+# Suggest env vars for paths used 2+ times
+for path in "${!path_counts[@]}"; do
+    count=${path_counts[$path]}
+    if [[ $count -ge 2 ]]; then
+        performance_recommendations+=("Consider env variable for repeated path ($count uses): $path")
+        performance_priority+=("LOW")
+    fi
+done
+
+echo "  ✓ Found ${#performance_recommendations[@]} performance improvements"
 ```
 
 ### Best Practices
@@ -328,8 +378,42 @@ echo "⏳ Performance analysis - TODO"
 **Step 8: Validate against best practices**
 
 ```bash
-# TODO: Implement in next task
-echo "⏳ Best practices analysis - TODO"
+echo "✨ Running best practices analysis..."
+
+declare -a bestpractice_recommendations=()
+bestpractice_priority=()
+
+# Check for deprecated settings
+echo "  → Checking for deprecated settings..."
+
+deprecated_settings=$(jq -r '.deprecated.settings[]?' "$rules_file" 2>/dev/null)
+
+while IFS= read -r deprecated; do
+    if jq -e ".$deprecated" "$user_settings" >/dev/null 2>&1; then
+        replacement=$(jq -r ".deprecated.replacements.\"$deprecated\"" "$rules_file" 2>/dev/null)
+        bestpractice_recommendations+=("DEPRECATED: Remove '$deprecated' - $replacement")
+        bestpractice_priority+=("HIGH")
+    fi
+done <<< "$deprecated_settings"
+
+# Check for plugin configuration issues
+echo "  → Validating plugin configuration..."
+
+enabled_plugins=$(jq -r '.enabledPlugins | keys[]?' "$user_settings" 2>/dev/null)
+
+while IFS= read -r plugin; do
+    if [[ -n "$plugin" ]]; then
+        # Check if plugin directory exists
+        plugin_dir="$HOME/.claude/plugins/cache/$plugin"
+
+        if [[ ! -d "$plugin_dir" ]]; then
+            bestpractice_recommendations+=("Enabled plugin not found: $plugin (may need installation)")
+            bestpractice_priority+=("MEDIUM")
+        fi
+    fi
+done <<< "$enabled_plugins"
+
+echo "  ✓ Found ${#bestpractice_recommendations[@]} best practice issues"
 ```
 
 ## Priority Classification
