@@ -564,20 +564,57 @@ echo "For now, use --dry-run to see recommendations."
 
 ## Settings Modification
 
-**Step 11: Apply approved changes**
+**Step 11: Create backup and apply approved changes**
 
 ```bash
-# TODO: Implement in next task
-echo "⏳ Settings modification - TODO"
+echo "💾 Creating backup..."
+
+# Create backup with timestamp
+timestamp=$(date +%Y%m%d-%H%M%S)
+backup_file="$user_settings.backup-$timestamp"
+
+cp "$user_settings" "$backup_file"
+echo "✓ Backup created: $backup_file"
+
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "⚠️  SETTINGS MODIFICATION - Not Yet Implemented"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "Settings modification will include:"
+echo "  - JSON manipulation using jq"
+echo "  - Validation after changes"
+echo "  - Per-recommendation application"
+echo "  - Rollback on error"
+echo ""
 ```
 
 ## Documentation Generation
 
-**Step 12: Generate reports and guides**
+**Step 12: Generate comprehensive documentation**
 
 ```bash
-# TODO: Implement in next task
-echo "⏳ Documentation generation - TODO"
+# Create documentation directory
+docs_dir="$HOME/Projects/.workflow/docs/optimization/settings"
+mkdir -p "$docs_dir"
+
+echo "📝 Generating documentation..."
+
+# Create optimization report filename
+report_date=$(date +%Y-%m-%d)
+report_file="$docs_dir/$report_date-optimization-report.md"
+
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "⚠️  DOCUMENTATION GENERATION - Not Yet Implemented"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "Documentation will include:"
+echo "  - Optimization report: $report_file"
+echo "  - Best practices guide: $docs_dir/README.md"
+echo "  - Before/after comparisons"
+echo "  - Rollback instructions"
+echo ""
 ```
 
 ## Summary
