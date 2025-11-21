@@ -209,8 +209,56 @@ echo "  ✓ Found ${#consolidation_recommendations[@]} consolidation opportuniti
 **Step 5: Check for security issues**
 
 ```bash
-# TODO: Implement in next task
-echo "⏳ Security analysis - TODO"
+echo "🔒 Running security analysis..."
+
+# Load security rules
+security_rules=$(jq -r '.security' "$rules_file" 2>/dev/null || echo "{}")
+overly_permissive=$(echo "$security_rules" | jq -r '.overly_permissive_patterns[]?' 2>/dev/null)
+required_denials=$(echo "$security_rules" | jq -r '.required_denials[]?' 2>/dev/null)
+
+declare -a security_recommendations=()
+security_priority=()
+
+# Check for overly permissive patterns in allow list
+echo "  → Checking for overly permissive patterns..."
+
+user_allows=$(jq -r '.permissions.allow[]?' "$user_settings" 2>/dev/null)
+
+while IFS= read -r permissive_pattern; do
+    if echo "$user_allows" | grep -Fq "$permissive_pattern"; then
+        security_recommendations+=("HIGH RISK: Overly permissive pattern found: $permissive_pattern")
+        security_priority+=("HIGH")
+    fi
+done <<< "$overly_permissive"
+
+# Check for missing required denials
+echo "  → Checking for missing security denials..."
+
+user_denies=$(jq -r '.permissions.deny[]?' "$user_settings" 2>/dev/null)
+
+while IFS= read -r required_denial; do
+    if ! echo "$user_denies" | grep -Fq "$required_denial"; then
+        security_recommendations+=("Missing security denial: $required_denial")
+        security_priority+=("HIGH")
+    fi
+done <<< "$required_denials"
+
+# Check for contradictions (allow undermines deny)
+echo "  → Checking for allow/deny contradictions..."
+
+while IFS= read -r deny_pattern; do
+    # Extract the core pattern (e.g., "Read(~/.ssh/id_*)")
+    # Check if a broader allow pattern exists
+    core_path=$(echo "$deny_pattern" | sed 's/.*(\(.*\)).*/\1/')
+
+    # Simple check: if we deny something specific but allow something broader
+    if echo "$user_allows" | grep -q "$(echo "$core_path" | sed 's/\/id_\*/\/\*\*/')"; then
+        security_recommendations+=("CONTRADICTION: deny '$deny_pattern' may be undermined by broader allow pattern")
+        security_priority+=("HIGH")
+    fi
+done <<< "$user_denies"
+
+echo "  ✓ Found ${#security_recommendations[@]} security concerns"
 ```
 
 ### Migration Analysis
