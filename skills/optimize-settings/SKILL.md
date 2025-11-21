@@ -266,8 +266,52 @@ echo "  ✓ Found ${#security_recommendations[@]} security concerns"
 **Step 6: Find migration candidates**
 
 ```bash
-# TODO: Implement in next task
-echo "⏳ Migration analysis - TODO"
+echo "🚀 Running migration analysis..."
+
+declare -a migration_recommendations=()
+migration_priority=()
+
+# Only meaningful in global mode
+if [[ "$mode" == "global" ]]; then
+    echo "  → Analyzing permissions across projects..."
+
+    # Count permission frequency across project settings
+    declare -A permission_counts
+
+    for settings_file in "${settings_files[@]}"; do
+        if [[ "$settings_file" == "$user_settings" ]]; then
+            continue  # Skip user-level
+        fi
+
+        project_perms=$(jq -r '.permissions.allow[]?' "$settings_file" 2>/dev/null)
+
+        while IFS= read -r perm; do
+            if [[ -n "$perm" ]]; then
+                permission_counts["$perm"]=$((${permission_counts["$perm"]:-0} + 1))
+            fi
+        done <<< "$project_perms"
+    done
+
+    # Find permissions that appear in 3+ projects
+    min_count=3
+    user_perms=$(jq -r '.permissions.allow[]?' "$user_settings" 2>/dev/null)
+
+    for perm in "${!permission_counts[@]}"; do
+        count=${permission_counts[$perm]}
+
+        if [[ $count -ge $min_count ]]; then
+            # Check if already in user-level
+            if ! echo "$user_perms" | grep -Fxq "$perm"; then
+                migration_recommendations+=("Move to user-level (appears in $count projects): $perm")
+                migration_priority+=("MEDIUM")
+            fi
+        fi
+    done
+
+    echo "  ✓ Found ${#migration_recommendations[@]} migration candidates"
+else
+    echo "  ℹ️  Migration analysis only available in global mode"
+fi
 ```
 
 ### Performance Analysis
