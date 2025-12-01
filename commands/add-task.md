@@ -71,6 +71,6 @@ Tasks can optionally sync to OmniFocus for personal task management.
 ## Related
 
 - Skill: `add-task`, `manage-tasks` (implementation)
-- Plugin: agents-context-system
+- Plugin: phil-ai-context
 - Companion: Task management workflows
 - Integration: Jira (work), OmniFocus (personal)

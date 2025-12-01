@@ -191,9 +191,9 @@ Contains (created on first run, updated on subsequent runs):
 **Wildcard Opportunities:**
 ```json
 // BEFORE (8 entries)
-"Skill(agents-learning-system:*)",
-"Skill(agents-documentation-suite:*)",
-"Skill(agents-context-system:*)"
+"Skill(phil-ai-learning:*)",
+"Skill(phil-ai-docs:*)",
+"Skill(phil-ai-context:*)"
 
 // AFTER (1 entry)
 "Skill(agents-*:*)"
@@ -293,12 +293,12 @@ work_projects=$(find ~/Projects/work -name ".claude" -type d)
 ```json
 // BEFORE (repeated path)
 "Bash(~/Projects/.workflow/scripts/**)",
-"Bash(~/.claude/plugins/cache/agents-learning-system/scripts/**:*)"
+"Bash(~/.claude/plugins/cache/phil-ai-learning/scripts/**:*)"
 
 // AFTER (use env var)
 "env": {
   "WORKFLOW_SCRIPTS": "~/Projects/.workflow/scripts",
-  "AGENTS_SCRIPTS": "~/.claude/plugins/cache/agents-learning-system/scripts"
+  "AGENTS_SCRIPTS": "~/.claude/plugins/cache/phil-ai-learning/scripts"
 },
 "permissions": {
   "allow": [
@@ -354,7 +354,7 @@ Found:
 **Output Example:**
 ```
 Running in PROJECT mode
-Analyzed: user + current project (agents-context-system)
+Analyzed: user + current project (phil-ai-context)
 
 Found:
 - 3 permissions duplicate user-level → remove from project
@@ -387,16 +387,16 @@ Found:
 ### Mode Override
 User can force specific mode:
 ```bash
-/agents-context-system:optimize-settings --global      # Force global scan
-/agents-context-system:optimize-settings --user-only   # Force user-only
-/agents-context-system:optimize-settings --dry-run     # Show recommendations, don't apply
+/phil-ai-context:optimize-settings --global      # Force global scan
+/phil-ai-context:optimize-settings --user-only   # Force user-only
+/phil-ai-context:optimize-settings --dry-run     # Show recommendations, don't apply
 ```
 
 ## Implementation Structure
 
 ### File Structure
 ```
-agents-context-system/
+phil-ai-context/
 ├── commands/
 │   └── optimize-settings.md          # Command entry point
 ├── skills/
@@ -426,16 +426,16 @@ Use and follow the `optimize-settings` skill exactly as written.
 
 From any location:
 ```bash
-/agents-context-system:optimize-settings              # Context-adaptive
-/agents-context-system:optimize-settings --global     # Force global scan
-/agents-context-system:optimize-settings --user-only  # User-level only
-/agents-context-system:optimize-settings --dry-run    # Show recommendations only
+/phil-ai-context:optimize-settings              # Context-adaptive
+/phil-ai-context:optimize-settings --global     # Force global scan
+/phil-ai-context:optimize-settings --user-only  # User-level only
+/phil-ai-context:optimize-settings --dry-run    # Show recommendations only
 ```
 
 ## Related
 
 - Skill: `optimize-settings` (implementation)
-- Plugin: agents-context-system
+- Plugin: phil-ai-context
 - Companion: `/optimize-agents`, `/optimize-mcp`
 ```
 
@@ -608,7 +608,7 @@ The `/optimize-settings` command is successful when:
 
 ```bash
 $ cd ~/Projects
-$ /agents-context-system:optimize-settings
+$ /phil-ai-context:optimize-settings
 
 🔍 Context Detection
 Running in GLOBAL mode (scanning all profiles)

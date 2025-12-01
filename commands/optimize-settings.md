@@ -17,10 +17,10 @@ Use and follow the `optimize-settings` skill exactly as written.
 From any location in your project hierarchy:
 
 ```bash
-/agents-context-system:optimize-settings              # Context-adaptive mode
-/agents-context-system:optimize-settings --global     # Force global scan
-/agents-context-system:optimize-settings --user-only  # User-level only
-/agents-context-system:optimize-settings --dry-run    # Show recommendations without applying
+/phil-ai-context:optimize-settings              # Context-adaptive mode
+/phil-ai-context:optimize-settings --global     # Force global scan
+/phil-ai-context:optimize-settings --user-only  # User-level only
+/phil-ai-context:optimize-settings --dry-run    # Show recommendations without applying
 ```
 
 The skill will:
@@ -88,6 +88,6 @@ Produces comprehensive artifacts in `~/Projects/.workflow/docs/optimization/sett
 ## Related
 
 - Skill: `optimize-settings` (implementation)
-- Plugin: agents-context-system
+- Plugin: phil-ai-context
 - Companion: `/optimize-agents`, `/optimize-mcp`
 - Design: `docs/plans/2025-11-20-optimize-settings-design.md`

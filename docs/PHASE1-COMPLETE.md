@@ -75,7 +75,7 @@ cd ~/Projects
 /optimize-settings --dry-run
 
 # Or from a project
-cd ~/.claude/plugins/cache/agents-context-system
+cd ~/.claude/plugins/cache/phil-ai-context
 /optimize-settings --dry-run
 
 # Or user-level only

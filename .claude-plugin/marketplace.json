@@ -1,7 +1,7 @@
 {
   "name": "context-system-dev",
   "plugins": [{
-    "name": "agents-context-system",
+    "name": "phil-ai-context",
     "source": "./"
   }]
 }

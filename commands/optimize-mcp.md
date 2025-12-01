@@ -65,6 +65,6 @@ The skill will:
 ## Related
 
 - Skill: `optimize-mcp-config` (implementation)
-- Plugin: agents-context-system
+- Plugin: phil-ai-context
 - Companion: `/optimize-agents` (for AGENTS.md optimization)
-- Integration: agents-documentation-suite (for MCP documentation)
+- Integration: phil-ai-docs (for MCP documentation)

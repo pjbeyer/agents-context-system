@@ -138,7 +138,7 @@ echo ""
 echo "🔍 Running consolidation analysis..."
 
 # Load rules - use environment variable or default to standard location
-PLUGIN_DIR="${CLAUDE_PLUGIN_DIR:-$HOME/.claude/plugins/cache/agents-context-system}"
+PLUGIN_DIR="${CLAUDE_PLUGIN_DIR:-$HOME/.claude/plugins/cache/phil-ai-context}"
 rules_file="$PLUGIN_DIR/config/settings-rules.json"
 
 # Verify config file exists

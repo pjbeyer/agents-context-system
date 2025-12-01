@@ -1,4 +1,4 @@
-# agents-context-system
+# phil-ai-context
 
 Optimize AGENTS.md files, manage MCP configuration, and load context efficiently.
 
@@ -9,9 +9,9 @@ Optimize AGENTS.md files, manage MCP configuration, and load context efficiently
 ```json
 {
   "approvedSkills": [
-    "agents-context-system:optimize-agents-context",
-    "agents-context-system:optimize-mcp-config",
-    "agents-context-system:add-task"
+    "phil-ai-context:optimize-agents-context",
+    "phil-ai-context:optimize-mcp-config",
+    "phil-ai-context:add-task"
   ]
 }
 ```
@@ -30,8 +30,8 @@ Optimize AGENTS.md files, manage MCP configuration, and load context efficiently
 ## Installation
 
 ```bash
-/plugin marketplace add pjbeyer/agents-marketplace
-/plugin install agents-context-system@agents-marketplace
+/plugin marketplace add pjbeyer/phil-ai
+/plugin install phil-ai-context@phil-ai
 ```
 
 ## Commands
@@ -248,12 +248,12 @@ Three configuration files define behavior:
 
 ## Integration with Other Plugins
 
-### agents-documentation-suite
+### phil-ai-docs
 - Uses context-system for AGENTS.md optimization
 - Machine documentation writing with token budgets
 - Hierarchical documentation coordination
 
-### agents-learning-system
+### phil-ai-learning
 - Learnings captured at appropriate hierarchy level
 - Context-aware learning storage
 
@@ -275,7 +275,7 @@ Load only what's needed. Agent-level work doesn't need global context.
 
 ### Structure
 ```
-agents-context-system/
+phil-ai-context/
 ├── .claude-plugin/
 │   └── plugin.json
 ├── skills/
@@ -347,4 +347,4 @@ MIT License
 
 ## Repository
 
-https://github.com/pjbeyer/agents-context-system
+https://github.com/pjbeyer/phil-ai-context

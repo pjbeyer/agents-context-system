@@ -230,7 +230,7 @@ recommendations="Based on content analysis:
 - Remove duplication from parent AGENTS.md"
 
 # Call issue creation script
-~/.claude/plugins/cache/agents-documentation-suite/scripts/create-optimization-issue.sh \
+~/.claude/plugins/cache/phil-ai-docs/scripts/create-optimization-issue.sh \
     "$file_path" "$current_size" "$max_size" "$recommendations"
 ```
 
@@ -246,7 +246,7 @@ recommendations="Based on content analysis:
 
 ## Comprehensive Documentation Fix
 
-If AGENTS.md issues go beyond simple optimization, suggest agents-documentation-suite:
+If AGENTS.md issues go beyond simple optimization, suggest phil-ai-docs:
 
 **When to suggest:**
 - File is >50% over budget
@@ -259,9 +259,9 @@ If AGENTS.md issues go beyond simple optimization, suggest agents-documentation-
 ```bash
 echo ""
 echo "This AGENTS.md needs more than optimization."
-echo "Consider using agents-documentation-suite for comprehensive rewrite:"
+echo "Consider using phil-ai-docs for comprehensive rewrite:"
 echo ""
-echo "  Use skill: agents-documentation-suite:write-machine-docs"
+echo "  Use skill: phil-ai-docs:write-machine-docs"
 echo "  Or command: /doc write --audience=machine --target=AGENTS.md"
 echo ""
 echo "This will:"
@@ -298,4 +298,4 @@ This skill can be invoked by:
 - Quarterly documentation reviews
 - Post-major-changes optimization
 - Cross-profile analysis workflows
-- agents-documentation-suite (for machine doc writing)
+- phil-ai-docs (for machine doc writing)

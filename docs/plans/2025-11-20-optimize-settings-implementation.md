@@ -4,7 +4,7 @@
 
 **Goal:** Implement `/optimize-settings` command that comprehensively analyzes and optimizes Claude Code settings with context-adaptive behavior and interactive approval flow.
 
-**Architecture:** Skill-based command following agents-context-system patterns. Context detection determines scope (global/project/user), five analysis categories classify recommendations by priority, interactive approval flow applies changes with full documentation and backup.
+**Architecture:** Skill-based command following phil-ai-context patterns. Context detection determines scope (global/project/user), five analysis categories classify recommendations by priority, interactive approval flow applies changes with full documentation and backup.
 
 **Tech Stack:** Bash scripting, JSON parsing (jq), markdown generation, git integration
 
@@ -222,7 +222,7 @@ Produces comprehensive artifacts in `~/Projects/.workflow/docs/optimization/sett
 ## Related
 
 - Skill: `optimize-settings` (implementation)
-- Plugin: agents-context-system
+- Plugin: phil-ai-context
 - Companion: `/optimize-agents`, `/optimize-mcp`
 - Design: `docs/plans/2025-11-20-optimize-settings-design.md`
 ```
@@ -503,17 +503,17 @@ Run from different locations:
 ```bash
 # Test from ~/Projects
 cd ~/Projects
-/agents-context-system:optimize-settings --dry-run
+/phil-ai-context:optimize-settings --dry-run
 # Expected: "🌍 Running in GLOBAL mode"
 
 # Test from ~/.claude
 cd ~/.claude
-/agents-context-system:optimize-settings --dry-run
+/phil-ai-context:optimize-settings --dry-run
 # Expected: "👤 Running in USER mode"
 
-# Test from agents-context-system
-cd ~/.claude/plugins/cache/agents-context-system
-/agents-context-system:optimize-settings --dry-run
+# Test from phil-ai-context
+cd ~/.claude/plugins/cache/phil-ai-context
+/phil-ai-context:optimize-settings --dry-run
 # Expected: "📁 Running in PROJECT mode"
 ```
 
@@ -548,7 +548,7 @@ Replace the "Consolidation Analysis" section with:
 echo "🔍 Running consolidation analysis..."
 
 # Load rules
-rules_file="$HOME/.claude/plugins/cache/agents-context-system/config/settings-rules.json"
+rules_file="$HOME/.claude/plugins/cache/phil-ai-context/config/settings-rules.json"
 consolidation_rules=$(jq -r '.consolidation' "$rules_file" 2>/dev/null || echo "{}")
 
 # Arrays to track recommendations
@@ -619,8 +619,8 @@ echo "  ✓ Found ${#consolidation_recommendations[@]} consolidation opportuniti
 
 Run:
 ```bash
-cd ~/.claude/plugins/cache/agents-context-system
-/agents-context-system:optimize-settings --dry-run
+cd ~/.claude/plugins/cache/phil-ai-context
+/phil-ai-context:optimize-settings --dry-run
 ```
 
 Expected: Shows consolidation recommendations based on actual settings
@@ -706,8 +706,8 @@ echo "  ✓ Found ${#security_recommendations[@]} security concerns"
 
 Run:
 ```bash
-cd ~/.claude/plugins/cache/agents-context-system
-/agents-context-system:optimize-settings --dry-run
+cd ~/.claude/plugins/cache/phil-ai-context
+/phil-ai-context:optimize-settings --dry-run
 ```
 
 Expected: Shows security recommendations
@@ -790,7 +790,7 @@ fi
 Run from global mode:
 ```bash
 cd ~/Projects
-/agents-context-system:optimize-settings --dry-run
+/phil-ai-context:optimize-settings --dry-run
 ```
 
 Expected: Shows permissions that appear in multiple projects
@@ -927,8 +927,8 @@ echo "  ✓ Found ${#bestpractice_recommendations[@]} best practice issues"
 
 Run:
 ```bash
-cd ~/.claude/plugins/cache/agents-context-system
-/agents-context-system:optimize-settings --dry-run
+cd ~/.claude/plugins/cache/phil-ai-context
+/phil-ai-context:optimize-settings --dry-run
 ```
 
 Expected: Shows performance and best practice recommendations
@@ -1071,8 +1071,8 @@ fi
 
 Run:
 ```bash
-cd ~/.claude/plugins/cache/agents-context-system
-/agents-context-system:optimize-settings --dry-run
+cd ~/.claude/plugins/cache/phil-ai-context
+/phil-ai-context:optimize-settings --dry-run
 ```
 
 Expected: Shows all recommendations organized by priority with counts
@@ -1133,7 +1133,7 @@ echo "For now, use --dry-run to see recommendations."
 
 Run:
 ```bash
-cd ~/.claude/plugins/cache/agents-context-system
+cd ~/.claude/plugins/cache/phil-ai-context
 /optimize-settings --dry-run
 ```
 
@@ -1222,8 +1222,8 @@ echo ""
 
 Run:
 ```bash
-cd ~/.claude/plugins/cache/agents-context-system
-/agents-context-system:optimize-settings --dry-run
+cd ~/.claude/plugins/cache/phil-ai-context
+/phil-ai-context:optimize-settings --dry-run
 ```
 
 Expected: Runs through all analysis, shows placeholders for future implementation
@@ -1336,7 +1336,7 @@ If testing via development marketplace installation:
 
 Expected:
 - Plugin is installed successfully
-- Command `/agents-context-system:optimize-settings` appears in command list
+- Command `/phil-ai-context:optimize-settings` appears in command list
 - No errors during plugin load
 
 **Step 0.5: Restart Claude Code before testing**
@@ -1347,7 +1347,7 @@ Restart Claude Code to ensure all plugin changes are loaded. This is critical fo
 
 ```bash
 cd ~/Projects
-/agents-context-system:optimize-settings --dry-run
+/phil-ai-context:optimize-settings --dry-run
 ```
 
 **Expected output:**
@@ -1360,8 +1360,8 @@ cd ~/Projects
 **Step 2: Test project mode**
 
 ```bash
-cd ~/.claude/plugins/cache/agents-context-system
-/agents-context-system:optimize-settings --dry-run
+cd ~/.claude/plugins/cache/phil-ai-context
+/phil-ai-context:optimize-settings --dry-run
 ```
 
 **Expected output:**
@@ -1374,7 +1374,7 @@ cd ~/.claude/plugins/cache/agents-context-system
 
 ```bash
 cd ~/.claude
-/agents-context-system:optimize-settings --dry-run
+/phil-ai-context:optimize-settings --dry-run
 ```
 
 **Expected output:**
@@ -1386,8 +1386,8 @@ cd ~/.claude
 **Step 4: Test mode overrides**
 
 ```bash
-cd ~/.claude/plugins/cache/agents-context-system
-/agents-context-system:optimize-settings --global --dry-run
+cd ~/.claude/plugins/cache/phil-ai-context
+/phil-ai-context:optimize-settings --global --dry-run
 ```
 
 **Expected output:**
@@ -1399,7 +1399,7 @@ cd ~/.claude/plugins/cache/agents-context-system
 ```bash
 # Test with no settings file
 mv ~/.claude/settings.json ~/.claude/settings.json.tmp
-/agents-context-system:optimize-settings --dry-run
+/phil-ai-context:optimize-settings --dry-run
 mv ~/.claude/settings.json.tmp ~/.claude/settings.json
 ```
 
@@ -1578,5 +1578,5 @@ The `/optimize-settings` command now:
 **Test it:**
 ```bash
 cd ~/Projects
-/agents-context-system:optimize-settings --dry-run
+/phil-ai-context:optimize-settings --dry-run
 ```

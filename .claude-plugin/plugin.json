@@ -1,12 +1,12 @@
 {
-  "name": "agents-context-system",
-  "version": "1.0.6",
+  "name": "phil-ai-context",
+  "version": "1.1.0",
   "description": "Manage hierarchical agent infrastructure, AGENTS.md optimization, MCP configuration, and smart context loading across profiles",
   "author": {
     "name": "Phil Beyer",
     "email": "6152278+pjbeyer@users.noreply.github.com"
   },
   "license": "MIT",
-  "repository": "https://github.com/pjbeyer/agents-context-system",
+  "repository": "https://github.com/pjbeyer/phil-ai-context",
   "keywords": ["agents", "context", "optimization", "hierarchy", "mcp", "token-efficiency"]
 }

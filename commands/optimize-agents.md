@@ -65,6 +65,6 @@ Respects profile-specific standards:
 ## Related
 
 - Skill: `optimize-agents-context` (implementation)
-- Plugin: agents-context-system
-- Integration: agents-documentation-suite (for machine doc writing)
+- Plugin: phil-ai-context
+- Integration: phil-ai-docs (for machine doc writing)
 - Companion: `/optimize-mcp` (for MCP configuration)

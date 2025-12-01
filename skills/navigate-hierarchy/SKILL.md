@@ -154,5 +154,5 @@ find_siblings() {
 Invoked by:
 - Context loading (load-agents-context)
 - Optimization (optimize-agents)
-- Documentation coordination (agents-documentation-suite)
+- Documentation coordination (phil-ai-docs)
 - Cross-reference validation

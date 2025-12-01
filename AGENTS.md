@@ -1,4 +1,4 @@
-# agents-context-system
+# phil-ai-context
 
 Claude Code plugin for hierarchical AGENTS.md optimization, MCP configuration, and smart context loading.
 
@@ -46,8 +46,8 @@ Optimize AI context across development environments (global/profile/project/agen
 
 ## Integration
 
-- **agents-documentation-suite**: Token budget enforcement
-- **agents-learning-system**: Context-aware learning storage
+- **phil-ai-docs**: Token budget enforcement
+- **phil-ai-learning**: Context-aware learning storage
 - **workflow system**: Profile detection, task routing
 
 ## Profile Standards

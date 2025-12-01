@@ -259,4 +259,4 @@ This skill can be invoked by:
 - MCP configuration reviews
 - New server addition workflows
 - Cross-profile MCP analysis
-- agents-documentation-suite (for MCP documentation)
+- phil-ai-docs (for MCP documentation)
